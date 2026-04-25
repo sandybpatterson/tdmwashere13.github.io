@@ -16,7 +16,26 @@
                   flex-direction: column;
                   align-items: center;
                   padding: 5rem 2rem 6rem;
+                  transition: background-color 0.3s ease, color 0.3s ease;
           }
+          body.dark {
+                  background-color: #1a1a1a;
+                  color: #e8e0d0;
+          }
+          .moon-toggle {
+                  position: fixed;
+                  top: 1.2rem;
+                  right: 1.5rem;
+                  font-size: 1.4rem;
+                  cursor: pointer;
+                  color: #4a7fc1;
+                  background: none;
+                  border: none;
+                  line-height: 1;
+                  z-index: 999;
+                  transition: color 0.3s ease;
+          }
+          body.dark .moon-toggle { color: #ffffff; }
           .author-name {
                   font-family: 'Cinzel', serif;
                   font-size: 2.2rem;
@@ -25,7 +44,9 @@
                   color: #2c2416;
                   text-align: center;
                   margin-bottom: 0.5rem;
+                  transition: color 0.3s ease;
           }
+          body.dark .author-name { color: #e8e0d0; }
           .author-tagline {
                   font-family: 'EB Garamond', serif;
                   font-style: italic;
@@ -33,13 +54,16 @@
                   color: #6b5a3e;
                   text-align: center;
                   margin-bottom: 4rem;
+                  transition: color 0.3s ease;
           }
+          body.dark .author-tagline { color: #a89880; }
           .divider {
                   width: 60px;
                   height: 1px;
                   background: #b8a98a;
                   margin: 0 auto 4rem;
           }
+          body.dark .divider { background: #444; }
           .shelf {
                   display: flex;
                   gap: 3rem;
@@ -67,6 +91,7 @@
                   transition: transform 0.2s ease, box-shadow 0.2s ease;
                   position: relative;
           }
+          body.dark .book-cover { background: #2a2a2a; box-shadow: 4px 6px 18px rgba(0,0,0,0.5); }
           .book-cover::before {
                   content: '';
                   position: absolute;
@@ -112,19 +137,15 @@
                   text-align: center;
                   text-transform: uppercase;
           }
-          .book.locked .book-cover {
-                  background: #a89880;
-                  opacity: 0.6;
-                  cursor: default;
-          }
-          .book.locked:hover .book-cover {
-                  transform: none;
-                  box-shadow: 4px 6px 18px rgba(44,36,22,0.3);
-          }
+          body.dark .book-label { color: #a89880; }
+          .book.locked .book-cover { background: #a89880; opacity: 0.6; cursor: default; }
+          body.dark .book.locked .book-cover { background: #333; }
+          .book.locked:hover .book-cover { transform: none; box-shadow: 4px 6px 18px rgba(44,36,22,0.3); }
           .book.locked .book-label { color: #b8a98a; }
         </style>
   </head>
   <body>
+      <button class="moon-toggle" onclick="toggleDark()" title="Toggle dark mode">&#9790;</button>button>
       <div class="author-name">Sandy B. Patterson</div>div>
       <div class="author-tagline">Stories from the American South</div>div>
       <div class="divider"></div>div>
@@ -144,8 +165,18 @@
                     <div class="book-label">Coming Soon</div>div>
             </div>div>
       </div>div>
+      <script>
+            if (localStorage.getItem('darkMode') === 'on') {
+                    document.body.classList.add('dark');
+            }
+            function toggleDark() {
+                    document.body.classList.toggle('dark');
+                    localStorage.setItem('darkMode', document.body.classList.contains('dark') ? 'on' : 'off');
+            }
+      </script>
   </body>
 </html>html>
+      </script>
   </body>
     </style></title>
   </head>
