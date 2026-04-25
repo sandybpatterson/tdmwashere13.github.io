@@ -1,185 +1,257 @@
-<!DOCTYPE html>
-<!-- saved from url=(0034)https://sandybpatterson.github.io/ -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sandy B. Patterson</title>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body {
-        background-color: #f5f0e8;
-        color: #2c2416;
-        font-family: 'EB Garamond', Georgia, serif;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 5rem 2rem 6rem;
-        transition: background-color 0.3s ease, color 0.3s ease;
-      }
-      body.dark {
-        background-color: #1a1a1a;
-        color: #e8e0d0;
-      }
-      .moon-toggle {
-        position: fixed;
-        top: 1.2rem;
-        right: 1.5rem;
-        font-size: 1.4rem;
-        cursor: pointer;
-        color: #4a7fc1;
-        background: none;
-        border: none;
-        line-height: 1;
-        z-index: 999;
-        transition: color 0.3s ease;
-      }
-      body.dark .moon-toggle { color: #ffffff; }
-      .author-name {
-        font-family: 'Cinzel', serif;
-        font-size: 2.2rem;
-        font-weight: 600;
-        letter-spacing: 0.12em;
-        color: #2c2416;
-        text-align: center;
-        margin-bottom: 0.5rem;
-        transition: color 0.3s ease;
-      }
-      body.dark .author-name { color: #e8e0d0; }
-      .author-tagline {
-        font-family: 'EB Garamond', serif;
-        font-style: italic;
-        font-size: 1.05rem;
-        color: #6b5a3e;
-        text-align: center;
-        margin-bottom: 4rem;
-        transition: color 0.3s ease;
-      }
-      body.dark .author-tagline { color: #a89880; }
-      .divider {
-        width: 60px;
-        height: 1px;
-        background: #b8a98a;
-        margin: 0 auto 4rem;
-      }
-      body.dark .divider { background: #444; }
-      .shelf {
-        display: flex;
-        gap: 3rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .book {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-decoration: none;
-        width: 160px;
-      }
-      .book-cover {
-        width: 160px;
-        height: 220px;
-        background: #2c2416;
-        border-radius: 3px 6px 6px 3px;
-        box-shadow: 4px 6px 18px rgba(44,36,22,0.3);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 1.5rem 1rem;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        position: relative;
-      }
-      body.dark .book-cover { background: #2a2a2a; box-shadow: 4px 6px 18px rgba(0,0,0,0.5); }
-      .book-cover::before {
-        content: '';
-        position: absolute;
-        left: 0; top: 0; bottom: 0;
-        width: 12px;
-        background: rgba(255,255,255,0.06);
-        border-radius: 3px 0 0 3px;
-      }
-      .book:hover .book-cover {
-        transform: translateY(-6px);
-        box-shadow: 0 12px 30px rgba(44,36,22,0.22);
-      }
-      .book-cover-title {
-        font-family: 'Cinzel', serif;
-        font-size: 0.78rem;
-        font-weight: 600;
-        color: #f5f0e8;
-        text-align: center;
-        letter-spacing: 0.08em;
-        line-height: 1.5;
-      }
-      .book-cover-ornament {
-        color: #b8a98a;
-        font-size: 1rem;
-        margin: 0.8rem 0;
-        letter-spacing: 0.3em;
-      }
-      .book-cover-author {
-        font-family: 'EB Garamond', serif;
-        font-style: italic;
-        font-size: 0.68rem;
-        color: #b8a98a;
-        text-align: center;
-        position: absolute;
-        bottom: 1rem;
-      }
-      .book-label {
-        margin-top: 1rem;
-        font-family: 'Cinzel', serif;
-        font-size: 0.68rem;
-        letter-spacing: 0.15em;
-        color: #8a7355;
-        text-align: center;
-        text-transform: uppercase;
-      }
-      body.dark .book-label { color: #a89880; }
-      .book.locked .book-cover { background: #a89880; opacity: 0.6; cursor: default; }
-      body.dark .book.locked .book-cover { background: #333; }
-      .book.locked:hover .book-cover { transform: none; box-shadow: 4px 6px 18px rgba(44,36,22,0.3); }
-      .book.locked .book-label { color: #b8a98a; }
-    </style>
-  </head>
-  <body class="">
-    <button class="moon-toggle" onclick="toggleDark()" title="Toggle dark mode">☾</button>
-    <div class="author-name">Sandy B. Patterson</div>
-    <div class="author-tagline">Stories from the American South</div>
-    <div class="divider"></div>
-    <div class="shelf">
-      <a href="https://sandybpatterson.github.io/stories/" class="book">
-        <div class="book-cover">
-          <div class="book-cover-title">Stories from Winchester</div>
-          <div class="book-cover-ornament">✦</div>
-          <div class="book-cover-author">Sandy B. Patterson</div>
-        </div>
-        <div class="book-label">Read Now</div>
-      </a>
-      <a href="#" class="book">
-        <div class="book-cover" style="background: none; padding: 0;">
-          <img src="/images/tobcover.png" alt="The Original Bug" style="width:160px; height:220px; object-fit:cover; border-radius: 3px 6px 6px 3px;">
-        </div>
-        <div class="book-label">Read Now</div>
-      </a>
-      <div class="book locked">
-        <div class="book-cover">
-          <div class="book-cover-title">Coming Soon</div>
-        </div>
-        <div class="book-label">Coming Soon</div>
-      </div>
-        </div>
-    <script>
-      if (localStorage.getItem('darkMode') === 'on') {
-        document.body.classList.add('dark');
-      }
-      function toggleDark() {
-        document.body.classList.toggle('dark');
-        localStorage.setItem('darkMode', document.body.classList.contains('dark') ? 'on' : 'off');
-      }
-    </script>
-  
 
-</body></html>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap');
+
+  .sbp-wrap {
+    background: #f7f2ea;
+    min-height: 540px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 2rem 0;
+    font-family: 'EB Garamond', Georgia, serif;
+  }
+
+  .sbp-name {
+    font-family: 'Cinzel', serif;
+    font-size: 2.3rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: #1e1810;
+    text-align: center;
+    margin-bottom: 0.4rem;
+  }
+
+  .sbp-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #7a6448;
+    text-align: center;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.4rem;
+  }
+
+  .sbp-rule {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    max-width: 360px;
+    margin-bottom: 3rem;
+  }
+
+  .sbp-rule-line {
+    flex: 1;
+    height: 1px;
+    background: #c4ae8a;
+  }
+
+  .sbp-rule-diamond {
+    width: 7px;
+    height: 7px;
+    background: #b8a07a;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .sbp-shelf {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .sbp-shelf-floor {
+    width: 100%;
+    max-width: 600px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #c4ae8a 20%, #c4ae8a 80%, transparent);
+    margin-top: 0;
+  }
+
+  .sbp-shelf-shadow {
+    width: 100%;
+    max-width: 600px;
+    height: 8px;
+    background: linear-gradient(to bottom, rgba(30,20,10,0.10), transparent);
+    margin-bottom: 2rem;
+  }
+
+  .sbp-book {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .sbp-cover {
+    width: 148px;
+    height: 210px;
+    background: #1e1810;
+    border-radius: 2px 7px 7px 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.4rem 1rem;
+    position: relative;
+    box-shadow:
+      2px 2px 0px #0a0806,
+      4px 4px 0px #130f09,
+      6px 8px 18px rgba(30,20,10,0.35),
+      8px 12px 30px rgba(30,20,10,0.18);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+  }
+
+  .sbp-book:hover .sbp-cover {
+    transform: translateY(-10px) rotate(-0.5deg);
+    box-shadow:
+      2px 2px 0px #0a0806,
+      4px 4px 0px #130f09,
+      8px 18px 28px rgba(30,20,10,0.4),
+      12px 24px 40px rgba(30,20,10,0.2);
+  }
+
+  .sbp-book:hover .sbp-label {
+    color: #6a4e2a;
+    border-bottom: 1px solid #b8a07a;
+  }
+
+  .sbp-cover::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 14px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 2px 0 0 2px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .sbp-cover::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: rgba(0,0,0,0.25);
+    border-radius: 0 7px 7px 0;
+  }
+
+  .sbp-cover-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #f0e8d8;
+    text-align: center;
+    letter-spacing: 0.1em;
+    line-height: 1.55;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sbp-cover-ornament {
+    color: #c4a870;
+    font-size: 0.9rem;
+    margin: 0.7rem 0;
+    letter-spacing: 0.35em;
+  }
+
+  .sbp-cover-author {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.7rem;
+    color: #c4a870;
+    text-align: center;
+    position: absolute;
+    bottom: 1rem;
+    letter-spacing: 0.04em;
+  }
+
+  .sbp-label {
+    margin-top: 0.9rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: #9a7d55;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    padding-bottom: 1px;
+  }
+
+  .sbp-coming .sbp-cover {
+    background: #1e1810;
+    box-shadow:
+      2px 2px 0px #0a0806,
+      4px 4px 0px #130f09,
+      6px 8px 18px rgba(30,20,10,0.25),
+      8px 12px 30px rgba(30,20,10,0.12);
+    opacity: 0.7;
+    cursor: default;
+  }
+
+  .sbp-coming:hover .sbp-cover { transform: none; }
+  .sbp-coming:hover .sbp-label { color: #9a7d55; border-bottom: 1px solid transparent; }
+  .sbp-coming-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    color: #c4a870;
+    text-align: center;
+    letter-spacing: 0.06em;
+    line-height: 1.6;
+  }
+  .sbp-coming .sbp-label { color: #b8a070; }
+
+  .sbp-img-cover { background: none !important; padding: 0 !important; overflow: hidden; }
+  .sbp-img-cover img {
+    width: 148px;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 2px 7px 7px 2px;
+    display: block;
+  }
+</style>
+
+<div class="sbp-wrap">
+  <div class="sbp-name">Sandy B. Patterson</div>
+  <div class="sbp-subtitle">Short Stories &amp; Novels</div>
+
+  <div class="sbp-rule">
+    <div class="sbp-rule-line"></div>
+    <div class="sbp-rule-diamond"></div>
+    <div class="sbp-rule-line"></div>
+  </div>
+
+  <div class="sbp-shelf">
+    <a href="#" class="sbp-book">
+      <div class="sbp-cover">
+        <div class="sbp-cover-title">Stories from Winchester</div>
+        <div class="sbp-cover-ornament">✦</div>
+        <div class="sbp-cover-author">Sandy B. Patterson</div>
+      </div>
+      <div class="sbp-label">Read Now</div>
+    </a>
+
+    <a href="#" class="sbp-book">
+      <div class="sbp-cover sbp-img-cover">
+        <img src="https://placehold.co/148x210/2c2416/b8a98a?text=TOB" alt="The Original Bug" />
+      </div>
+      <div class="sbp-label">Read Now</div>
+    </a>
+
+    <div class="sbp-book sbp-coming">
+      <div class="sbp-cover">
+        <div class="sbp-coming-title">Coming<br>Soon</div>
+        <div class="sbp-cover-ornament" style="font-size:0.7rem;">✦ ✦ ✦</div>
+      </div>
+      <div class="sbp-label">Coming Soon</div>
+    </div>
+  </div>
+
+  <div class="sbp-shelf-floor"></div>
+  <div class="sbp-shelf-shadow"></div>
+</div>
