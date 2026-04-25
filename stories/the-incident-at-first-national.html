@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Incident at First National</title>
   <style>
- 
+
     @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
- 
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
- 
+
     body {
       background-color: #f5f0e8;
       color: #2c2416;
@@ -21,22 +21,62 @@
       font-size: 1.08rem;
       line-height: 1.85;
       padding: 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
- 
+
+    body.dark {
+      background-color: #1a1a1a;
+      color: #e8e0d0;
+    }
+
+    /* ── Moon toggle ── */
+    .moon-toggle {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.5rem;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #4a7fc1;
+      background: none;
+      border: none;
+      line-height: 1;
+      z-index: 999;
+      transition: color 0.3s ease;
+    }
+    body.dark .moon-toggle { color: #ffffff; }
+
     .page {
       max-width: 680px;
       margin: 0 auto;
       padding: 3.5rem 2.5rem 5rem 2.5rem;
     }
- 
+
+    /* ── Back link ── */
+    .back-link {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: #8a7355;
+      text-decoration: none;
+      text-transform: uppercase;
+      margin-bottom: 2.8rem;
+      transition: color 0.3s ease;
+    }
+    body.dark .back-link { color: #a89880; }
+    .back-link:hover { color: #2c2416; }
+    body.dark .back-link:hover { color: #e8e0d0; }
+
     /* ── Chapter header ── */
     .chapter-header {
       text-align: center;
       margin-bottom: 3.2rem;
       padding-bottom: 1.8rem;
       border-bottom: 1px solid #b8a98a;
+      transition: border-color 0.3s ease;
     }
- 
+    body.dark .chapter-header { border-bottom-color: #444; }
+
     .chapter-label {
       font-family: 'Cinzel', serif;
       font-size: 0.72rem;
@@ -45,7 +85,8 @@
       color: #8a7355;
       margin-bottom: 0.9rem;
     }
- 
+    body.dark .chapter-label { color: #a89880; }
+
     .chapter-title {
       font-family: 'Cinzel', serif;
       font-size: 1.85rem;
@@ -53,16 +94,20 @@
       color: #2c2416;
       line-height: 1.3;
       margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
     }
- 
+    body.dark .chapter-title { color: #e8e0d0; }
+
     .chapter-subtitle {
       font-family: 'EB Garamond', serif;
       font-style: italic;
       font-size: 1.0rem;
       color: #6b5a3e;
       margin-top: 0.4rem;
+      transition: color 0.3s ease;
     }
- 
+    body.dark .chapter-subtitle { color: #a89880; }
+
     /* ── Ornamental divider ── */
     .ornament {
       text-align: center;
@@ -71,21 +116,21 @@
       letter-spacing: 0.4em;
       margin: 2.2rem 0;
     }
- 
+
     /* ── Body text ── */
     p {
       margin-bottom: 1.2rem;
       text-indent: 1.8em;
     }
- 
+
     p.no-indent {
       text-indent: 0;
     }
- 
+
     p.first {
       text-indent: 0;
     }
- 
+
     p.first::first-letter {
       font-family: 'Cinzel', serif;
       font-size: 3.4rem;
@@ -96,12 +141,13 @@
       margin-top: 0.12em;
       color: #5a3e1b;
     }
- 
+    body.dark p.first::first-letter { color: #c8a87a; }
+
     /* ── Dialogue ── */
     em {
       font-style: italic;
     }
- 
+
     /* ── Section break ── */
     .section-break {
       text-align: center;
@@ -110,7 +156,7 @@
       font-size: 1.3rem;
       letter-spacing: 0.5em;
     }
- 
+
     /* ── Closing line ── */
     .closing {
       text-align: center;
@@ -120,8 +166,10 @@
       margin-top: 3.5rem;
       padding-top: 1.5rem;
       border-top: 1px solid #b8a98a;
+      transition: color 0.3s ease, border-color 0.3s ease;
     }
- 
+    body.dark .closing { color: #a89880; border-top-color: #444; }
+
     /* ── Author credit ── */
     .author {
       text-align: center;
@@ -130,169 +178,174 @@
       letter-spacing: 0.18em;
       color: #8a7355;
       margin-top: 0.6rem;
+      transition: color 0.3s ease;
     }
- 
+    body.dark .author { color: #a89880; }
+
   </style>
 </head>
 <body>
-<div class="page">
- 
-  <div class="chapter-header">
-    <div class="chapter-label">Rivoli to Oldham &nbsp;·&nbsp; Winchester, Tennessee</div>
-    <div class="chapter-title">The Incident at First National</div>
-    <div class="chapter-subtitle">October the Fourth, 1923</div>
-  </div>
- 
-  <p class="first">Winchester woke slowly on the morning of October the fourth, the way it always did when autumn had finally made up its mind about the temperature. Frost clung to the low places along the creek, and the maple on the corner of Main and Second had gone the color of a dying ember. Harold Finch, who had swept the steps of First National Savings every morning for eleven years, arrived at his usual time to find the chain.</p>
- 
-  <p>He stood there a long moment, broom in hand, studying it.</p>
- 
-  <p>It was a logging chain — heavy, serious iron — looped twice around the base of the bank's new exterior strongbox and trailing off across the boardwalk like something had tried very hard to go somewhere and thought better of it. There were hoof prints in the soft mud at the edge of the street. Deep ones. The kind left by something large and unhurried.</p>
- 
-  <p>Harold looked down the street in one direction. Then the other. Then he went inside and told Mr. Calhoun, the bank manager, who came out in his vest without his coat and stood in the same spot Harold had stood, wearing the same expression.</p>
- 
-  <p>By seven o'clock, Sheriff Roy Bain knew about it. By seven fifteen, so did half of Winchester.</p>
- 
-  <div class="section-break">✦ &nbsp; ✦ &nbsp; ✦</div>
- 
+
+  <button class="moon-toggle" onclick="toggleDark()" title="Toggle dark mode">&#9790;</button>
+
+  <div class="page">
+
+    <a href="https://sandybpatterson.github.io/stories/" class="back-link">← Stories from Winchester</a>
+
+    <div class="chapter-header">
+      <div class="chapter-label">A Story from Winchester</div>
+      <div class="chapter-title">The Incident at First National</div>
+      <div class="chapter-subtitle">Winchester, Tennessee &nbsp;·&nbsp; October 1923</div>
+    </div>
+
   <p class="first no-indent">The Cutter brothers — Dell, twenty-two, and Roy, nineteen — were not bad men in the way that truly bad men are bad. They were more the variety of trouble that arrives not from malice but from bad judgment compounded by corn whiskey and the particular kind of confidence that only exists in the hours between midnight and four in the morning.</p>
- 
+
   <p>They had grown up in the hollow west of town, the sons of a sawyer who had died when Roy was still in short pants, leaving behind a small house, a smaller plot of land, and a reputation for hard work that his boys had inherited only partially and selectively. Their mother, Ida, was a lean, tired woman who had long since exhausted her capacity for surprise where Dell and Roy were concerned. She would hear the full story by noon, sit with it a moment, and then return to her mending without comment. This was not indifference. It was a woman who had learned to ration her reactions.</p>
- 
+
   <p>The idea had come to Dell first, as most of their ideas did, which was itself a warning sign nobody had been awake to observe. He'd heard from a man at the feed store — a man whose name he couldn't now fully recall, and whose reliability he had not thought to question — that the strongbox First National had bolted to the outside wall was newer than it looked, and newer meant the lock was simpler. He'd also heard that a fellow over in Tullahoma had pulled a safe clean off a wall with a logging chain and a good team. Made off with two hundred dollars and a leather pouch full of silver.</p>
- 
+
   <p>Roy had listened to this story with the solemn attention of a man trying to remember it accurately enough to repeat it later. Then he'd said, <em>"We ain't got a team."</em></p>
- 
+
   <p>Dell had thought about this with the focused deliberation of a man working through a serious problem. <em>"We got Biscuit."</em></p>
- 
+
   <div class="section-break">✦ &nbsp; ✦ &nbsp; ✦</div>
- 
+
   <p class="first no-indent">Silas Pruitt's draft horse was, by any honest measure, a magnificent animal. Broad as a barn door, with a back like a dinner table and a disposition so even-tempered that children routinely fell asleep on him at the county fair. He had pulled stumps, hauled timber, dragged equipment out of creek beds, and done it all without complaint or drama. Silas said Biscuit was the most reliable creature he had ever known, human or otherwise, and he said it without any apparent awareness of how that reflected on the humans.</p>
- 
+
   <p>What Biscuit was not — had never been, and seemed to understand about himself with considerable clarity — was a criminal.</p>
- 
+
   <p>Dell and Roy had let themselves into Silas's barn around midnight. Biscuit had regarded them from his stall with large, dark, patient eyes. He did not resist being led out. He was not that kind of horse. But something in the set of his ears, even then, suggested he was reserving judgment about the whole enterprise.</p>
- 
+
   <p>They walked him down Elm Street in the dark, the logging chain coiled over Dell's shoulder, Roy carrying a lantern turned so low it was more suggestion than light. Winchester was asleep. The only sounds were their boots on the packed dirt road and the slow, deliberate clop of Biscuit's hooves, which seemed to Dell unnecessarily loud for a criminal undertaking.</p>
- 
+
   <p>It took them nearly twenty minutes to reach First National. Another ten to get the chain around the strongbox to Dell's satisfaction. He'd wrapped it twice, tested the tension, and declared it sound with the authority of a man who had never done anything like this before and was constructing confidence from spare parts.</p>
- 
+
   <p>Roy held Biscuit's lead.</p>
- 
+
   <p>Dell slapped the horse on the flank.</p>
- 
+
   <p>Biscuit leaned into it — genuinely, honestly leaned — and the chain went taut and the strongbox groaned against its bolts and absolutely nothing else happened.</p>
- 
+
   <p>Dell slapped him again. Biscuit pulled harder. A bolt somewhere made a sound like a question being asked in a language nobody present spoke. Then Biscuit stopped, redistributed his considerable weight, and turned his head back toward Dell with an expression that a more sober man might have recognized as a moral verdict.</p>
- 
+
   <p><em>"Come on,"</em> Dell said, low and urgent. <em>"Come on now."</em></p>
- 
+
   <p>The second attempt was longer and more earnest. The strongbox moved perhaps a quarter inch. One of the chain links bit a clean notch into the corner of the brick that would remain there for the next thirty years, outlasting everyone involved in making it. Biscuit's hooves churned the mud at the edge of the boardwalk into a thorough mess, and then he stopped again.</p>
- 
+
   <p>This time he did not turn his head. He simply stood, breathing slowly, in the manner of a creature who has met his obligation and found the entire project beneath further consideration.</p>
- 
+
   <p>Roy said quietly, <em>"Dell."</em></p>
- 
+
   <p><em>"One more time."</em></p>
- 
+
   <p><em>"Dell, I think—"</em></p>
- 
+
   <p><em>"One more time, Roy."</em></p>
- 
+
   <p>The third attempt lasted perhaps forty-five seconds. The strongbox held. The chain held. The brick held. The only thing that gave at all was a rusted bracket on the underside of the box, which bent slightly and would later prompt Mr. Calhoun to write a strongly worded letter to the manufacturer in Nashville that went unanswered for six weeks.</p>
- 
+
   <p>And then Biscuit simply stopped. Planted. Done. The decision was final and clearly not open to appeal.</p>
- 
+
   <p>Dell stood in the mud looking at the strongbox. Roy stood beside him. The lantern flickered in a cold breeze rolling down off the ridge, and for a long moment neither of them said anything at all. The town was still asleep around them. Somewhere down the creek, a dog barked once and went quiet.</p>
- 
+
   <p>It was Roy who finally broke the silence.</p>
- 
+
   <p><em>"The horse quit."</em></p>
- 
+
   <p>Dell took off his hat, looked at it for a moment as though it might offer something useful, and put it back on. <em>"Yeah."</em></p>
- 
+
   <p><em>"What do we do?"</em></p>
- 
+
   <p>Dell looked at the chain. At the notch gouged into the brick. At the churned mud. At Biscuit, who was now gazing placidly down Main Street with the serene expression of an animal who has made his peace with the evening and moved on.</p>
- 
+
   <p><em>"Leave it,"</em> Dell said.</p>
- 
+
   <p>They untied the lead from the post, walked Biscuit two blocks north, and tied him to the hitching post outside Greer's Feed and Supply with the loose, distracted knot of men who have already mentally departed the scene. Biscuit accepted this without comment. He would be found there at first light by Silas Pruitt himself, who stood with his hands on his hips studying the horse for a long, quiet moment before asking nobody in particular what in the world had gotten into people.</p>
- 
+
   <p>The Cutter brothers were found asleep in the bed of an empty hay wagon behind the Methodist church on Pine Street. Sheriff Bain said Roy still had a length of spare chain looped around his forearm, the way a man falls asleep mid-task and simply forgets to finish letting go.</p>
- 
+
   <div class="section-break">✦ &nbsp; ✦ &nbsp; ✦</div>
- 
+
   <p class="first no-indent">George Oldham heard the story in layers, which was how Winchester delivered most of its significant news — not all at once, but accumulated, each telling adding color and detail until by afternoon the event had achieved the particular richness of local legend.</p>
- 
+
   <p>Millie got to him first.</p>
- 
+
   <p>She came flying into the Rivoli's lobby just before eight, braids half-undone, cheeks flushed from running, with the breathless urgency of a child delivering news she knows is extraordinary.</p>
- 
+
   <p><em>"Mr. George! Mr. George, the Cutter boys tried to rob First National with a horse and the horse quit on them and they left the chain right there on the boardwalk and Sheriff Bain found Roy asleep with the chain still on his arm—"</em></p>
- 
+
   <p>She delivered all of this in a single unbroken breath, then stood waiting with wide eyes for his reaction.</p>
- 
+
   <p>George was trimming the wick on the lobby's center lamp. He set his scissors down carefully and gave Millie the full weight of his attention, which she had learned to understand as a sign he was taking something seriously.</p>
- 
+
   <p><em>"They used a horse,"</em> he said.</p>
- 
+
   <p><em>"Yes sir. Silas Pruitt's horse. Biscuit."</em></p>
- 
+
   <p><em>"And Biscuit—"</em></p>
- 
+
   <p><em>"Quit."</em> Millie said it with tremendous satisfaction. <em>"Just stopped and looked at them and quit."</em></p>
- 
+
   <p>George was quiet for a moment. Outside through the Rivoli's front glass he could see Main Street coming to life, clusters of people already gathering, voices carrying the story from doorway to doorway the way fire moves through dry grass — fast, and feeding on itself.</p>
- 
+
   <p><em>"Are the boys hurt?"</em></p>
- 
+
   <p><em>"No sir. Just sleeping."</em></p>
- 
+
   <p><em>"And Biscuit?"</em></p>
- 
+
   <p><em>"Tied outside Greer's. Eating the hitching post, Silas said."</em></p>
- 
+
   <p>George looked at the lamp. Then at the scissors in his hand. He set them down again with the deliberate care of a man deciding something.</p>
- 
+
   <p><em>"Two grown men,"</em> he said, mostly to himself. <em>"A logging chain. A borrowed horse. And they still couldn't manage it."</em></p>
- 
+
   <p>He shook his head once — not with contempt, but with the particular weary amusement of a man who has watched enough of life to know that most disasters are not grand or tragic. Most of them are just foolish.</p>
- 
+
   <p>Agnes appeared from the back hallway at that moment, arms folded across her chest, having caught the last of it. She looked at George. He looked at her. Something passed between them in that brief exchange — the comfortable shorthand of two people who had shared enough years and enough stories to communicate volumes in a glance.</p>
- 
+
   <p>Then Agnes sat down in the nearest chair and laughed until her eyes watered and she had to press her apron to her face.</p>
- 
+
   <p>Millie laughed too, delighted, bouncing on her heels, watching both of them. She would remember this moment for the rest of her life — not the robbery, which was barely even a robbery, but George standing in the amber morning light of his lobby, shaking his head slowly, and Agnes laughing in the chair by the door, and the way the whole ridiculous story seemed to fill the old building like warmth.</p>
- 
+
   <div class="section-break">✦ &nbsp; ✦ &nbsp; ✦</div>
- 
+
   <p class="first no-indent">George thought about it again that afternoon while he was checking the Rivoli's projection equipment in the upstairs booth — the small, hot room that smelled permanently of machine oil and warm metal where he spent more quiet hours than anyone knew.</p>
- 
+
   <p>He thought about Dell Cutter, who was twenty-two years old and had apparently looked at his circumstances and concluded that a horse and a logging chain at midnight was a reasonable path forward. He thought about what a man has to be missing — not in character, necessarily, but in options — before a plan like that seems worth attempting.</p>
- 
+
   <p>George had known lean years himself. He knew what it was to look at a week and not see a clear way through it. He was not a sentimental man, and he was not in the habit of excusing foolishness. But he was capable of the particular kind of understanding that comes not from agreement but from recognition.</p>
- 
+
   <p>He didn't say any of this to anyone. It wasn't the kind of thing you said out loud in Winchester in 1923. But he thought it, there in the warm dark of the projection booth, with the smell of oil in the air and the sound of the street coming up faintly through the floor below.</p>
- 
+
   <p>Then he went back to work. There was a picture playing Friday, and the second reel needed attention.</p>
- 
+
   <div class="section-break">✦ &nbsp; ✦ &nbsp; ✦</div>
- 
+
   <p class="first no-indent">First National never replaced the strongbox. Mr. Calhoun had the bent bracket repaired and left the rest as it was. The scuff mark stayed on the brick for decades — long after Calhoun was gone, long after the Cutter brothers had faded into the general memory of the town, long after most people could say with certainty what had caused it.</p>
- 
+
   <p>But some of the older residents remembered. And when a grandchild or a newcomer asked about the mark, they would smile in a particular way and say only that it was a long story, and that a horse had been involved, and that the horse had shown considerably better judgment than the men who brought him there.</p>
- 
+
   <p>Winchester told the story for forty years. It got better every time. By the end, Biscuit had become a kind of local hero — patient, enormous, and morally sound in a way the rest of the participants were not.</p>
- 
+
   <p>Which, when you thought about it, was about right.</p>
- 
+
   <div class="closing">
     A chapter from <em>Rivoli to Oldham</em>
   </div>
-  <div class="author">Sandy B. P.</div>
- 
-</div>
+  <div class="author">Sandy B. Patterson</div>
+
+  </div>
+
+  <script>
+    if (localStorage.getItem('darkMode') === 'on') {
+      document.body.classList.add('dark');
+    }
+    function toggleDark() {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark') ? 'on' : 'off');
+    }
+  </script>
+
 </body>
 </html>
- 
