@@ -1,152 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Stories from Winchester</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stories from Winchester</title>
     <style>
-          @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
-          * { margin: 0; padding: 0; box-sizing: border-box; }
-          body {
-                  background-color: #f5f0e8;
-                  color: #2c2416;
-                  font-family: 'EB Garamond', Georgia, serif;
-                  min-height: 100vh;
-                  padding: 4rem 2rem 6rem;
-                  transition: background-color 0.3s ease, color 0.3s ease;
-          }
-          body.dark { background-color: #1a1a1a; color: #e8e0d0; }
-          .moon-toggle {
-                  position: fixed;
-                  top: 1.2rem;
-                  right: 1.5rem;
-                  font-size: 1.4rem;
-                  cursor: pointer;
-                  color: #4a7fc1;
-                  background: none;
-                  border: none;
-                  line-height: 1;
-                  z-index: 999;
-                  transition: color 0.3s ease;
-          }
-          body.dark .moon-toggle { color: #ffffff; }
-          .container { max-width: 680px; margin: 0 auto; }
-          .back-link {
-                  display: inline-block;
-                  font-family: 'Cinzel', serif;
-                  font-size: 0.68rem;
-                  letter-spacing: 0.15em;
-                  color: #8a7355;
-                  text-decoration: none;
-                  text-transform: uppercase;
-                  margin-bottom: 3rem;
-                  transition: color 0.3s ease;
-          }
-          body.dark .back-link { color: #a89880; }
-          .back-link:hover { color: #2c2416; }
-          body.dark .back-link:hover { color: #e8e0d0; }
-          .header {
-                  text-align: center;
-                  margin-bottom: 1rem;
-                  padding-bottom: 2rem;
-                  border-bottom: 1px solid #b8a98a;
-                  transition: border-color 0.3s ease;
-          }
-          body.dark .header { border-bottom-color: #444; }
-          .header-label {
-                  font-family: 'Cinzel', serif;
-                  font-size: 0.7rem;
-                  letter-spacing: 0.22em;
-                  text-transform: uppercase;
-                  color: #8a7355;
-                  margin-bottom: 0.8rem;
-          }
-          body.dark .header-label { color: #a89880; }
-          .header-title {
-                  font-family: 'Cinzel', serif;
-                  font-size: 2rem;
-                  font-weight: 600;
-                  color: #2c2416;
-                  margin-bottom: 0.5rem;
-                  transition: color 0.3s ease;
-          }
-          body.dark .header-title { color: #e8e0d0; }
-          .header-subtitle {
-                  font-family: 'EB Garamond', serif;
-                  font-style: italic;
-                  font-size: 1rem;
-                  color: #6b5a3e;
-                  transition: color 0.3s ease;
-          }
-          body.dark .header-subtitle { color: #a89880; }
-          .story-list { margin-top: 3rem; }
-          .story-item {
-                  display: block;
-                  text-decoration: none;
-                  padding: 1.8rem 0;
-                  border-bottom: 1px solid #d9cfc0;
-                  transition: padding-left 0.2s ease, border-color 0.3s ease;
-          }
-          body.dark .story-item { border-bottom-color: #333; }
-          .story-item:hover { padding-left: 0.5rem; }
-          .story-date {
-                  font-family: 'Cinzel', serif;
-                  font-size: 0.65rem;
-                  letter-spacing: 0.18em;
-                  color: #8a7355;
-                  text-transform: uppercase;
-                  margin-bottom: 0.4rem;
-          }
-          body.dark .story-date { color: #a89880; }
-          .story-title {
-                  font-family: 'Cinzel', serif;
-                  font-size: 1.15rem;
-                  font-weight: 600;
-                  color: #2c2416;
-                  margin-bottom: 0.4rem;
-                  transition: color 0.3s ease;
-          }
-          body.dark .story-title { color: #e8e0d0; }
-          .story-excerpt {
-                  font-family: 'EB Garamond', serif;
-                  font-size: 0.98rem;
-                  color: #6b5a3e;
-                  font-style: italic;
-                  line-height: 1.6;
-                  transition: color 0.3s ease;
-          }
-          body.dark .story-excerpt { color: #a89880; }
-        </style>
+      @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        background-color: #f5f0e8;
+        color: #2c2416;
+        font-family: 'EB Garamond', Georgia, serif;
+        min-height: 100vh;
+        padding: 4rem 2rem 6rem;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      body.dark { background-color: #1a1a1a; color: #e8e0d0; }
+      .moon-toggle {
+        position: fixed;
+        top: 1.2rem;
+        right: 1.5rem;
+        font-size: 1.4rem;
+        cursor: pointer;
+        color: #4a7fc1;
+        background: none;
+        border: none;
+        line-height: 1;
+        z-index: 999;
+        transition: color 0.3s ease;
+      }
+      body.dark .moon-toggle { color: #ffffff; }
+      .container { max-width: 680px; margin: 0 auto; }
+      .back-link {
+        display: inline-block;
+        font-family: 'Cinzel', serif;
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        color: #8a7355;
+        text-decoration: none;
+        text-transform: uppercase;
+        margin-bottom: 3rem;
+        transition: color 0.3s ease;
+      }
+      body.dark .back-link { color: #a89880; }
+      .back-link:hover { color: #2c2416; }
+      body.dark .back-link:hover { color: #e8e0d0; }
+      .header {
+        text-align: center;
+        margin-bottom: 1rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #b8a98a;
+        transition: border-color 0.3s ease;
+      }
+      body.dark .header { border-bottom-color: #444; }
+      .header-label {
+        font-family: 'Cinzel', serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #8a7355;
+        margin-bottom: 0.8rem;
+      }
+      body.dark .header-label { color: #a89880; }
+      .header-title {
+        font-family: 'Cinzel', serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: #2c2416;
+        margin-bottom: 0.5rem;
+        transition: color 0.3s ease;
+      }
+      body.dark .header-title { color: #e8e0d0; }
+      .header-subtitle {
+        font-family: 'EB Garamond', serif;
+        font-style: italic;
+        font-size: 1rem;
+        color: #6b5a3e;
+        transition: color 0.3s ease;
+      }
+      body.dark .header-subtitle { color: #a89880; }
+      .story-list { margin-top: 3rem; }
+      .story-item {
+        display: block;
+        text-decoration: none;
+        padding: 1.8rem 0;
+        border-bottom: 1px solid #d9cfc0;
+        transition: padding-left 0.2s ease, border-color 0.3s ease;
+      }
+      body.dark .story-item { border-bottom-color: #333; }
+      .story-item:hover { padding-left: 0.5rem; }
+      .story-date {
+        font-family: 'Cinzel', serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.18em;
+        color: #8a7355;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+      }
+      body.dark .story-date { color: #a89880; }
+      .story-title {
+        font-family: 'Cinzel', serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #2c2416;
+        margin-bottom: 0.4rem;
+        transition: color 0.3s ease;
+      }
+      body.dark .story-title { color: #e8e0d0; }
+      .story-excerpt {
+        font-family: 'EB Garamond', serif;
+        font-size: 0.98rem;
+        color: #6b5a3e;
+        font-style: italic;
+        line-height: 1.6;
+        transition: color 0.3s ease;
+      }
+      body.dark .story-excerpt { color: #a89880; }
+    </style>
   </head>
   <body>
-      <button class="moon-toggle" onclick="toggleDark()" title="Toggle dark mode">&#9790;</button>button>
-      <div class="container">
-            <a href="/" class="back-link">&#8592; Sandy B. Patterson</a>a>
-            <div class="header">
-                    <div class="header-label">A Collection</div>div>
-                    <div class="header-title">Stories from Winchester</div>div>
-                    <div class="header-subtitle">Winchester, Tennessee &nbsp;&#183;&nbsp; Franklin County</div>div>
-            </div>div>
-            <div class="story-list">
-                    <a href="/stories/the-incident-at-first-national.html" class="story-item">
-                              <div class="story-date">October the Fourth, 1923</div>div>
-                              <div class="story-title">The Incident at First National</div>div>
-                              <div class="story-excerpt">Winchester woke slowly on the morning of October the fourth, the way it always did when autumn had finally made up its mind about the temperature.</div>div>
-                    </a>a>
-            </div>div>
-      </div>div>
-      <script>
-            if (localStorage.getItem('darkMode') === 'on') {
-                    document.body.classList.add('dark');
-            }
-            function toggleDark() {
-                    document.body.classList.toggle('dark');
-                    localStorage.setItem('darkMode', document.body.classList.contains('dark') ? 'on' : 'off');
-            }
-      </script>
+    <button class="moon-toggle" onclick="toggleDark()" title="Toggle dark mode">☾</button>
+    <div class="container">
+      <a href="https://sandybpatterson.github.io/" class="back-link">← Sandy B. Patterson</a>
+      <div class="header">
+        <div class="header-label">A Collection</div>
+        <div class="header-title">Stories from Winchester</div>
+        <div class="header-subtitle">Winchester, Tennessee &nbsp;·&nbsp; Franklin County</div>
+      </div>
+      <div class="story-list">
+        <a href="https://sandybpatterson.github.io/stories/the-incident-at-first-national.html" class="story-item">
+          <div class="story-date">October the Fourth, 1923</div>
+          <div class="story-title">The Incident at First National</div>
+          <div class="story-excerpt">Winchester woke slowly on the morning of October the fourth, the way it always did when autumn had finally made up its mind about the temperature.</div>
+        </a>
+      </div>
+    </div>
+    <script>
+      if (localStorage.getItem('darkMode') === 'on') {
+        document.body.classList.add('dark');
+      }
+      function toggleDark() {
+        document.body.classList.toggle('dark');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark') ? 'on' : 'off');
+      }
+    </script>
   </body>
-</html>html>
-      </script>
-  </body>
-    </style></title>
-  </head>
+</html>
