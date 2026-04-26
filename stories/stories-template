@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STORY TITLE HERE — Rivoli to Oldham</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+
+    /* ═══════════════════════════════════════════
+       CSS VARIABLE SYSTEM
+       Edit colors here only — never below.
+    ═══════════════════════════════════════════ */
+
+    :root {
+      --bg:              #f5f0e8;
+      --bg-secondary:    #edeae0;
+      --text:            #2c2416;
+      --heading:         #1a1008;
+      --muted:           #8a7355;
+      --accent:          #5c3d1e;
+      --border:          #d4c9b0;
+      --border-light:    #e8e2d4;
+      --pull-border:     #a08060;
+      --drop-cap:        #2c2416;
+      --player-bg:       #edeae0;
+      --player-border:   #d4c9b0;
+      --btn-bg:          #2c2416;
+      --btn-text:        #f5f0e8;
+      --btn-hover:       #5c3d1e;
+      --select-bg:       #f5f0e8;
+      --select-text:     #2c2416;
+      --select-border:   #d4c9b0;
+      --toggle-color:    #8a7355;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:              #191714;
+        --bg-secondary:    #211e1a;
+        --text:            #e8e0d0;
+        --heading:         #f5f0e8;
+        --muted:           #9a8a6a;
+        --accent:          #c8a06a;
+        --border:          #38322a;
+        --border-light:    #2e2922;
+        --pull-border:     #6a5040;
+        --drop-cap:        #e8e0d0;
+        --player-bg:       #211e1a;
+        --player-border:   #38322a;
+        --btn-bg:          #e8e0d0;
+        --btn-text:        #191714;
+        --btn-hover:       #c8a06a;
+        --select-bg:       #2a2520;
+        --select-text:     #e8e0d0;
+        --select-border:   #38322a;
+        --toggle-color:    #9a8a6a;
+      }
+    }
+
+    html.dark {
+      --bg:              #191714;
+      --bg-secondary:    #211e1a;
+      --text:            #e8e0d0;
+      --heading:         #f5f0e8;
+      --muted:           #9a8a6a;
+      --accent:          #c8a06a;
+      --border:          #38322a;
+      --border-light:    #2e2922;
+      --pull-border:     #6a5040;
+      --drop-cap:        #e8e0d0;
+      --player-bg:       #211e1a;
+      --player-border:   #38322a;
+      --btn-bg:          #e8e0d0;
+      --btn-text:        #191714;
+      --btn-hover:       #c8a06a;
+      --select-bg:       #2a2520;
+      --select-text:     #e8e0d0;
+      --select-border:   #38322a;
+      --toggle-color:    #9a8a6a;
+    }
+
+    html.light {
+      --bg:              #f5f0e8;
+      --bg-secondary:    #edeae0;
+      --text:            #2c2416;
+      --heading:         #1a1008;
+      --muted:           #8a7355;
+      --accent:          #5c3d1e;
+      --border:          #d4c9b0;
+      --border-light:    #e8e2d4;
+      --pull-border:     #a08060;
+      --drop-cap:        #2c2416;
+      --player-bg:       #edeae0;
+      --player-border:   #d4c9b0;
+      --btn-bg:          #2c2416;
+      --btn-text:        #f5f0e8;
+      --btn-hover:       #5c3d1e;
+      --select-bg:       #f5f0e8;
+      --select-text:     #2c2416;
+      --select-border:   #d4c9b0;
+      --toggle-color:    #8a7355;
+    }
+
+    /* ═══════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════ */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.08rem;
+      line-height: 1.85;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* ═══════════════════════════════════════════
+       MODE TOGGLE
+    ═══════════════════════════════════════════ */
+
+    .mode-toggle {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.5rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--toggle-color);
+      background: none;
+      border: none;
+      line-height: 1;
+      z-index: 999;
+      transition: color 0.3s ease;
+      padding: 0.3rem;
+    }
+
+    .mode-toggle:hover { color: var(--accent); }
+
+    /* ═══════════════════════════════════════════
+       PAGE LAYOUT
+    ═══════════════════════════════════════════ */
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3.5rem 2.5rem 6rem 2.5rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════ */
+
+    .back-link {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover { color: var(--accent); }
+    .back-link::before { content: '← '; }
+
+    /* ═══════════════════════════════════════════
+       HEADER
+    ═══════════════════════════════════════════ */
+
+    .series-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .story-title {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--heading);
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+
+    .story-date {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.8rem 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       AUDIO PLAYER
+    ═══════════════════════════════════════════ */
+
+    .player-wrap {
+      margin: 1.5rem 0 0 0;
+      display: flex;
+      align-items: stretch; /* all children same height */
+      gap: 0.6rem;
+      flex-wrap: nowrap;
+    }
+
+    /* Play button */
+    .play-btn {
+      background: var(--btn-bg);
+      color: var(--btn-text);
+      border: none;
+      padding: 0 1.2em;
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      line-height: 1;
+      transition: background-color 0.2s ease;
+    }
+
+    .play-btn:hover { background: var(--btn-hover); }
+
+    /* Pause button */
+    .pause-btn {
+      background: none;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0 1em;
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      line-height: 1;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .pause-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Voice / source selector — matches button height */
+    .voice-select {
+      flex: 1;
+      min-width: 0;
+      background: var(--select-bg);
+      color: var(--select-text);
+      border: 1px solid var(--select-border);
+      padding: 0.42em 2em 0.42em 0.7em;
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a7355'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.6em center;
+      transition: border-color 0.2s ease;
+    }
+
+    .voice-select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Skip to — same row, TTS only, hidden by default */
+    .skip-inline {
+      display: none; /* toggled by JS */
+      align-items: stretch;
+      gap: 0.4rem;
+      flex-shrink: 0;
+    }
+
+    .skip-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+
+    .skip-select {
+      background: var(--select-bg);
+      color: var(--select-text);
+      border: 1px solid var(--select-border);
+      padding: 0 1.5em 0 0.5em;
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a7355'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.4em center;
+      transition: border-color 0.2s ease;
+    }
+
+    .skip-select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* ── Progress bar (recorded audio only) ── */
+    .progress-wrap {
+      margin: 0.7rem 0 0 0;
+      display: none;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 3px;
+      background: var(--border);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.1s linear;
+      pointer-events: none;
+    }
+
+    /* ── Toast error message ── */
+    .player-toast {
+      margin-top: 0.6rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      min-height: 1em;
+    }
+
+    .player-toast.visible { opacity: 1; }
+
+    /* Hidden audio element */
+    #storyAudio { display: none; }
+
+    /* ═══════════════════════════════════════════
+       STORY TEXT
+    ═══════════════════════════════════════════ */
+
+    .story-body p {
+      margin: 0 0 1.4em 0;
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    .story-body p.drop-cap::first-letter {
+      font-size: 3.8em;
+      font-weight: 600;
+      float: left;
+      line-height: 0.82;
+      margin-right: 6px;
+      margin-top: 6px;
+      color: var(--drop-cap);
+    }
+
+    blockquote.pull-quote {
+      border-left: 2px solid var(--pull-border);
+      margin: 2em 0;
+      padding: 0.4em 0 0.4em 1.4em;
+      font-style: italic;
+      font-size: 1.12em;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    p.section-break {
+      text-align: center;
+      color: var(--border);
+      letter-spacing: 0.5em;
+      margin: 2.2em 0;
+      font-size: 1em;
+    }
+
+    /* ═══════════════════════════════════════════
+       CLOSING
+    ═══════════════════════════════════════════ */
+
+    .closing {
+      margin-top: 3rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border);
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .author {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <button class="mode-toggle" onclick="toggleMode()" title="Toggle dark mode">☽</button>
+
+  <div class="page">
+
+    <!-- NAVIGATION — update href to point to your stories index -->
+    <a class="back-link" href="../stories/index.html">Stories from Winchester</a>
+
+    <!-- HEADER — fill in title and date -->
+    <p class="series-label">Rivoli to Oldham</p>
+    <h1 class="story-title">STORY TITLE HERE</h1>
+    <p class="story-date">MONTH, YEAR &nbsp;·&nbsp; Winchester, Tennessee</p>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════
+         AUDIO PLAYER
+         Replace YOUR_R2_AUDIO_URL_HERE with
+         your Cloudflare R2 file link.
+         Example:
+         https://pub-abc123.r2.dev/my-story.mp3
+    ═══════════════════════════════════════ -->
+
+    <div class="player-wrap">
+      <button class="play-btn" id="playBtn" onclick="handlePlay()">▶ Listen</button>
+      <button class="pause-btn" id="pauseBtn" onclick="handlePause()">⏸ Pause</button>
+
+      <select class="voice-select" id="voiceSelect" onchange="handleSourceChange()">
+        <option value="" disabled selected>Voices</option>
+        <optgroup label="─────────────────────">
+          <option value="recording">High Quality Recording</option>
+        </optgroup>
+        <optgroup label="System Voices" id="systemVoicesGroup">
+          <!-- populated by JavaScript -->
+        </optgroup>
+      </select>
+
+      <!-- Skip to — TTS only, sits inline to the right of dropdown -->
+      <div class="skip-inline" id="skipInline">
+        <span class="skip-label">Skip to</span>
+        <select class="skip-select" id="skipSelect" onchange="handleSkip(this.value)">
+          <option value="" disabled selected>—</option>
+          <option value="0">Start</option>
+          <option value="25">25%</option>
+          <option value="50">50%</option>
+          <option value="75">75%</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Toast error — fades in and out automatically -->
+    <div class="player-toast" id="playerToast"></div>
+
+    <!-- Progress bar — recorded audio only -->
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-track" id="progressTrack">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <audio id="storyAudio" src="YOUR_R2_AUDIO_URL_HERE" preload="none"></audio>
+
+    <hr class="divider" style="margin-top: 2rem;">
+
+    <!-- ═══════════════════════════════════════
+         STORY BODY
+         · First paragraph: class="drop-cap"
+         · Scene breaks: <p class="section-break">* * *</p>
+         · Pull quotes: <blockquote class="pull-quote">
+         · All other paragraphs: plain <p>
+    ═══════════════════════════════════════ -->
+
+    <div class="story-body" id="storyText">
+
+      <p class="drop-cap">YOUR OPENING PARAGRAPH GOES HERE. The first letter gets the decorative drop capital automatically.</p>
+
+      <p>Continue the story here. Each paragraph is a plain &lt;p&gt; tag. Spacing, justification, and hyphenation are handled for you.</p>
+
+      <p class="section-break">* * *</p>
+
+      <p>Use the section break above between major scene shifts.</p>
+
+      <blockquote class="pull-quote">Use a pull quote like this for a key line that earns its own space on the page.</blockquote>
+
+      <p>Your final line ends the story here.</p>
+
+    </div>
+
+    <div class="closing">A story from Winchester &nbsp;·&nbsp; <em>Rivoli to Oldham</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </div>
+
+
+  <script>
+
+    /* ════════════════════════════════════════════
+       DARK MODE
+    ════════════════════════════════════════════ */
+
+    function toggleMode() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      html.classList.remove('dark', 'light');
+      html.classList.add(isDark ? 'light' : 'dark');
+      localStorage.setItem('colorMode', isDark ? 'light' : 'dark');
+    }
+
+    (function () {
+      const saved = localStorage.getItem('colorMode');
+      if (saved) document.documentElement.classList.add(saved);
+    })();
+
+
+    /* ════════════════════════════════════════════
+       ELEMENTS
+    ════════════════════════════════════════════ */
+
+    const audio         = document.getElementById('storyAudio');
+    const playBtn       = document.getElementById('playBtn');
+    const pauseBtn      = document.getElementById('pauseBtn');
+    const voiceSelect   = document.getElementById('voiceSelect');
+    const systemGroup   = document.getElementById('systemVoicesGroup');
+    const progressWrap  = document.getElementById('progressWrap');
+    const progressFill  = document.getElementById('progressFill');
+    const progressTrack = document.getElementById('progressTrack');
+    const skipInline    = document.getElementById('skipInline');
+    const skipSelect    = document.getElementById('skipSelect');
+    const playerToast   = document.getElementById('playerToast');
+
+    let availableVoices = [];
+    let ttsActive       = false;
+    let sentences       = [];
+    let toastTimer      = null;
+
+
+    /* ════════════════════════════════════════════
+       CONSOLE CHECKS & AUDIO FALLBACK
+       Runs on page load. Checks the audio source,
+       restores saved voice preference, falls back
+       to system voice if recording is unavailable.
+    ════════════════════════════════════════════ */
+
+    function checkAudioAndSetDefault() {
+      const src = audio.getAttribute('src');
+      const isPlaceholder = !src || src === 'YOUR_R2_AUDIO_URL_HERE';
+
+      if (isPlaceholder) {
+        console.warn('✗ Audio source is still a placeholder — falling back to system voice.');
+        fallbackToSystemVoice();
+        return;
+      }
+
+      // Probe the audio source silently
+      const probe = new Audio();
+      probe.preload = 'metadata';
+
+      probe.addEventListener('loadedmetadata', function () {
+        console.log('✓ Audio source reachable — duration: ' + Math.round(probe.duration) + 's');
+        const savedVoice = localStorage.getItem('savedVoice');
+        if (savedVoice && savedVoice !== 'recording') {
+          console.log('✓ Restored user voice preference: ' + savedVoice);
+          // Wait for voices to populate then restore
+          restoreSavedVoice(savedVoice);
+        } else {
+          console.log('✓ Defaulting to High Quality Recording.');
+          voiceSelect.value = 'recording';
+          showPlayerUI('recording');
+        }
+      });
+
+      probe.addEventListener('error', function () {
+        console.warn('✗ Audio source failed to load — falling back to system voice.');
+        fallbackToSystemVoice();
+      });
+
+      probe.src = src;
+    }
+
+    function fallbackToSystemVoice() {
+      const savedVoice = localStorage.getItem('savedVoice');
+      if (savedVoice && savedVoice !== 'recording') {
+        restoreSavedVoice(savedVoice);
+      } else {
+        function pickFirstVoice() {
+          if (availableVoices.length > 0) {
+            voiceSelect.value = 'voice_0';
+            console.log('✓ Auto-selected first system voice: ' + availableVoices[0].name);
+            showPlayerUI('tts');
+          } else {
+            console.warn('✗ No system voices found — speech may not be supported in this browser.');
+          }
+        }
+        if (availableVoices.length > 0) {
+          pickFirstVoice();
+        } else {
+          setTimeout(pickFirstVoice, 500);
+        }
+      }
+    }
+
+    // Same as above but auto-plays after switching
+    function fallbackToSystemVoiceAndPlay() {
+      const savedVoice = localStorage.getItem('savedVoice');
+
+      function switchAndPlay(voiceIndex) {
+        voiceSelect.value = 'voice_' + voiceIndex;
+        showPlayerUI('tts');
+        setTimeout(function () { playTTS(0); }, 400);
+      }
+
+      if (savedVoice && savedVoice !== 'recording') {
+        const match = availableVoices.findIndex(v => v.name === savedVoice);
+        if (match !== -1) {
+          console.log('✓ Falling back to saved voice: ' + savedVoice);
+          switchAndPlay(match);
+        } else {
+          console.warn('✗ Saved voice not found — using first system voice.');
+          if (availableVoices.length > 0) switchAndPlay(0);
+        }
+      } else {
+        if (availableVoices.length > 0) {
+          console.log('✓ Falling back to first system voice: ' + availableVoices[0].name);
+          switchAndPlay(0);
+        } else {
+          console.warn('✗ No system voices available for fallback.');
+        }
+      }
+    }
+
+    function restoreSavedVoice(savedName) {
+      function tryRestore() {
+        const match = availableVoices.findIndex(v => v.name === savedName);
+        if (match !== -1) {
+          voiceSelect.value = 'voice_' + match;
+          console.log('✓ Restored saved voice preference: ' + savedName);
+          showPlayerUI('tts');
+        } else {
+          console.warn('✗ Saved voice "' + savedName + '" not found on this device — using first available.');
+          fallbackToSystemVoice();
+        }
+      }
+      if (availableVoices.length > 0) {
+        tryRestore();
+      } else {
+        setTimeout(tryRestore, 500);
+      }
+    }
+
+
+    /* ════════════════════════════════════════════
+       VOICE POPULATION
+    ════════════════════════════════════════════ */
+
+    function populateVoices() {
+      availableVoices = window.speechSynthesis.getVoices();
+      systemGroup.innerHTML = '';
+
+      if (availableVoices.length === 0) {
+        const opt = document.createElement('option');
+        opt.disabled = true;
+        opt.textContent = 'No system voices found';
+        systemGroup.appendChild(opt);
+        console.warn('✗ No system voices found — speech may not be supported.');
+        return;
+      }
+
+      availableVoices.forEach((voice, i) => {
+        const opt = document.createElement('option');
+        opt.value = 'voice_' + i;
+        opt.textContent = voice.name + (voice.lang ? '  (' + voice.lang + ')' : '');
+        systemGroup.appendChild(opt);
+      });
+
+      console.log('✓ ' + availableVoices.length + ' system voice(s) loaded.');
+    }
+
+    if (window.speechSynthesis) {
+      window.speechSynthesis.onvoiceschanged = function () {
+        populateVoices();
+        checkAudioAndSetDefault(); // re-run default selection after voices are ready
+      };
+      populateVoices();
+    }
+
+    // Run audio check after a short delay to let voices settle
+    window.addEventListener('load', function () {
+      setTimeout(checkAudioAndSetDefault, 300);
+    });
+
+
+    /* ════════════════════════════════════════════
+       TOAST ERROR MESSAGE
+    ════════════════════════════════════════════ */
+
+    function showToast(message) {
+      if (toastTimer) clearTimeout(toastTimer);
+      playerToast.textContent = message;
+      playerToast.classList.add('visible');
+      toastTimer = setTimeout(function () {
+        playerToast.classList.remove('visible');
+      }, 3000);
+    }
+
+
+    /* ════════════════════════════════════════════
+       UI SWITCHING
+    ════════════════════════════════════════════ */
+
+    function showPlayerUI(mode) {
+      if (mode === 'recording') {
+        progressWrap.style.display = 'block';
+        skipInline.style.display   = 'none';
+      } else {
+        progressWrap.style.display = 'none';
+        skipInline.style.display   = 'flex';
+      }
+    }
+
+
+    /* ════════════════════════════════════════════
+       SOURCE CHANGE
+    ════════════════════════════════════════════ */
+
+    function handleSourceChange() {
+      stopAll();
+      const mode = getSelectedMode();
+      showPlayerUI(mode);
+
+      // Save voice preference (not recording — that's the default)
+      if (mode === 'tts') {
+        const voice = getSelectedVoice();
+        if (voice) {
+          localStorage.setItem('savedVoice', voice.name);
+          console.log('✓ Voice preference saved: ' + voice.name);
+        }
+      } else {
+        localStorage.removeItem('savedVoice');
+        console.log('✓ Switched to High Quality Recording.');
+      }
+    }
+
+
+    /* ════════════════════════════════════════════
+       PLAYBACK HELPERS
+    ════════════════════════════════════════════ */
+
+    function getSelectedMode() {
+      return voiceSelect.value === 'recording' ? 'recording' : 'tts';
+    }
+
+    function getSelectedVoice() {
+      const idx = parseInt(voiceSelect.value.replace('voice_', ''));
+      return availableVoices[idx] || null;
+    }
+
+    function stopAll() {
+      audio.pause();
+      audio.currentTime = 0;
+      progressFill.style.width = '0%';
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      ttsActive = false;
+      skipSelect.value = '';
+    }
+
+    function handlePlay() {
+      if (!voiceSelect.value) {
+        console.warn('✗ No voice or source selected.');
+        return;
+      }
+      const mode = getSelectedMode();
+      if (mode === 'recording') {
+        playRecording();
+      } else {
+        playTTS(0);
+      }
+    }
+
+    function handlePause() {
+      if (!audio.paused) {
+        audio.pause();
+        console.log('⏸ Recording paused at ' + Math.round(audio.currentTime) + 's.');
+      } else if (ttsActive) {
+        window.speechSynthesis.cancel();
+        ttsActive = false;
+        console.log('⏸ TTS stopped.');
+      }
+    }
+
+
+    /* ════════════════════════════════════════════
+       RECORDED AUDIO + PROGRESS BAR
+    ════════════════════════════════════════════ */
+
+    function playRecording() {
+      audio.play().then(function () {
+        console.log('✓ Recording playing.');
+      }).catch(function (err) {
+        console.error('✗ Could not play audio: ' + err.message);
+      });
+    }
+
+    // Update progress bar as audio plays
+    audio.addEventListener('timeupdate', function () {
+      if (!audio.duration) return;
+      const pct = (audio.currentTime / audio.duration) * 100;
+      progressFill.style.width = pct + '%';
+    });
+
+    audio.addEventListener('ended', function () {
+      progressFill.style.width = '100%';
+      console.log('✓ Recording finished.');
+    });
+
+    audio.addEventListener('error', function () {
+      console.error('✗ Audio error — check your R2 URL. Falling back to system voice.');
+      showToast('Recording unavailable — switching voice');
+      fallbackToSystemVoiceAndPlay();
+    });
+
+    // Click or drag to scrub
+    progressTrack.addEventListener('click', function (e) {
+      if (!audio.duration) return;
+      const rect  = progressTrack.getBoundingClientRect();
+      const pct   = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = pct * audio.duration;
+      console.log('→ Scrubbed to ' + Math.round(audio.currentTime) + 's.');
+    });
+
+
+    /* ════════════════════════════════════════════
+       TTS + SENTENCE-BASED SKIP
+    ════════════════════════════════════════════ */
+
+    function buildSentences() {
+      const raw = document.getElementById('storyText').innerText;
+      // Split on sentence-ending punctuation followed by whitespace
+      sentences = raw.match(/[^.!?]+[.!?]+[\s]*/g) || [raw];
+      console.log('✓ Story split into ' + sentences.length + ' sentences.');
+    }
+
+    // Build sentence list once on load
+    window.addEventListener('load', buildSentences);
+
+    function playTTS(fromPercent) {
+      if (!window.speechSynthesis) {
+        console.error('✗ Speech synthesis not supported in this browser.');
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const startIndex = Math.floor((fromPercent / 100) * sentences.length);
+      const slice      = sentences.slice(startIndex).join(' ');
+
+      const utterance = new SpeechSynthesisUtterance(slice);
+      const voice     = getSelectedVoice();
+
+      if (voice) utterance.voice = voice;
+      utterance.rate   = 0.92;
+      utterance.pitch  = 1;
+      utterance.volume = 1;
+
+      utterance.onstart = function () {
+        ttsActive = true;
+        console.log('✓ TTS reading from sentence ' + startIndex + ' of ' + sentences.length + ' (' + fromPercent + '%).');
+      };
+
+      utterance.onend = function () {
+        ttsActive = false;
+        skipSelect.value = '';
+        console.log('✓ TTS finished.');
+      };
+
+      utterance.onerror = function (e) {
+        ttsActive = false;
+        console.error('✗ TTS error: ' + e.error);
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function handleSkip(value) {
+      if (value === '') return;
+      const pct = parseInt(value);
+      console.log('→ Skipping to ' + pct + '%.');
+      playTTS(pct);
+    }
+
+  </script>
+
+</body>
+</html>
