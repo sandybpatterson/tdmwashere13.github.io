@@ -717,9 +717,22 @@
         console.warn('⚠ No local voices found — showing all voices. Some may not work reliably.');
       }
 
-      // Split into English and everything else
-      const englishVoices = useVoices.filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
-      const otherVoices   = useVoices.filter(v => !v.lang || !v.lang.toLowerCase().startsWith('en'));
+      // Apple novelty/sound-effect voices that claim en-US but aren't real narrators
+      const noveltyNames = [
+        'bad news', 'bahh', 'bells', 'boing', 'bubbles', 'cellos', 'good news',
+        'jester', 'organ', 'superstar', 'trinoids', 'whisper', 'wobble', 'zarvox',
+        'pipe organ', 'hysterical', 'junior', 'kathy', 'ralph', 'deranged',
+        'albert', 'bruce', 'fred', 'princess', 'vicki', 'victoria'
+      ];
+
+      function isNovelty(voice) {
+        const name = voice.name.toLowerCase();
+        return noveltyNames.some(n => name.includes(n));
+      }
+
+      // English real voices at top, novelty + non-English at bottom
+      const englishVoices = useVoices.filter(v => v.lang && v.lang.toLowerCase().startsWith('en') && !isNovelty(v));
+      const otherVoices   = useVoices.filter(v => !v.lang || !v.lang.toLowerCase().startsWith('en') || isNovelty(v));
 
       console.log('✓ ' + englishVoices.length + ' English voice(s), ' + otherVoices.length + ' other voice(s).');
 
