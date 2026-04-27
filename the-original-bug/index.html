@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Original Bug — Sandy B. Patterson</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #0a0a0a;
+      color: #e8e8e8;
+      font-family: Georgia, 'Times New Roman', serif;
+      min-height: 100vh;
+    }
+    a { color: #c9a84c; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    nav {
+      width: 100%;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #2a2a2a;
+      background: #0a0a0a;
+    }
+    nav a.back-link {
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: #c9a84c;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    nav a.back-link::before { content: '← '; }
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 70px 24px 50px;
+      text-align: center;
+    }
+    .cover-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 42px;
+    }
+    .cover-wrap img {
+      width: 280px;
+      max-width: 90vw;
+      border: 1px solid #2e2e2e;
+      box-shadow: 0 0 60px rgba(201,168,76,0.18), 0 20px 60px rgba(0,0,0,0.7);
+      display: block;
+    }
+    .book-title {
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #f0f0f0;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .book-subtitle {
+      font-size: clamp(1rem, 3vw, 1.35rem);
+      font-style: italic;
+      color: #c9a84c;
+      margin-bottom: 20px;
+      letter-spacing: 0.02em;
+    }
+    .book-author {
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #888;
+    }
+    .divider {
+      width: 80px;
+      height: 1px;
+      background: #c9a84c;
+      margin: 40px auto;
+    }
+    .description {
+      max-width: 680px;
+      margin: 0 auto 50px;
+      padding: 0 24px;
+      text-align: center;
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: #ccc;
+    }
+    .chapter-index {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .chapter-index h2 {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    .chapter-list { list-style: none; border-top: 1px solid #1e1e1e; }
+    .chapter-list li {
+      border-bottom: 1px solid #1e1e1e;
+      padding: 18px 0;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .ch-num {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      color: #555;
+      min-width: 44px;
+      letter-spacing: 0.08em;
+    }
+    .ch-title { font-size: 1.05rem; color: #e8e8e8; flex: 1; }
+    .ch-title.available a { color: #e8e8e8; transition: color 0.2s; }
+    .ch-title.available a:hover { color: #c9a84c; text-decoration: none; }
+    .ch-title.greyed { color: #444; }
+    .ch-badge {
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+    .ch-badge.read { border: 1px solid #c9a84c44; color: #c9a84c; }
+    .ch-badge.soon { border: 1px solid #333; color: #444; }
+    footer {
+      border-top: 1px solid #1e1e1e;
+      padding: 32px 24px;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: #444;
+      text-transform: uppercase;
+    }
+    footer a { color: #666; }
+    footer a:hover { color: #c9a84c; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="back-link" href="https://sandybpatterson.github.io/">Bookshelf</a>
+  </nav>
+  <section class="hero">
+    <div class="cover-wrap">
+      <img src="tob-cover.png" alt="The Original Bug book cover" />
+    </div>
+    <p class="book-title">The Original Bug</p>
+    <p class="book-subtitle">Human Cognition and the AI It Corrupted</p>
+    <p class="book-author">Sandy B. Patterson</p>
+  </section>
+  <div class="divider"></div>
+  <div class="description">
+    <p>Before we can understand what artificial intelligence gets wrong, we have to understand what we get wrong &mdash; and why we built something so perfectly shaped to our own blind spots. <em>The Original Bug</em> is a rigorous and readable examination of human cognition, the systems we trust, and the machine we&rsquo;ve handed our thinking to.</p>
+  </div>
+  <div class="divider"></div>
+  <section class="chapter-index">
+    <h2>Contents</h2>
+    <ul class="chapter-list">
+      <li>
+        <span class="ch-num">PRO.</span>
+        <span class="ch-title available"><a href="prologue.html">Prologue</a></span>
+        <span class="ch-badge read">Read</span>
+      </li>
+      <li>
+        <span class="ch-num">01</span>
+        <span class="ch-title available"><a href="chapter-one.html">We Built It In Our Image</a></span>
+        <span class="ch-badge read">Preview</span>
+      </li>
+      <li>
+        <span class="ch-num">02</span>
+        <span class="ch-title greyed">Pattern Machines</span>
+        <span class="ch-badge soon">Coming Soon</span>
+      </li>
+      <li>
+        <span class="ch-num">03</span>
+        <span class="ch-title greyed">Confidence Without Competence</span>
+        <span class="ch-badge soon">Coming Soon</span>
+      </li>
+      <li>
+        <span class="ch-num">04</span>
+        <span class="ch-title greyed">The Shortcut Problem</span>
+        <span class="ch-badge soon">Coming Soon</span>
+      </li>
+      <li>
+        <span class="ch-num">05</span>
+        <span class="ch-title greyed">Ask a Better Question</span>
+        <span class="ch-badge soon">Coming Soon</span>
+      </li>
+      <li>
+        <span class="ch-num">06</span>
+        <span class="ch-title greyed">Narrative Is Not Truth</span>
+        <span class="ch-badge soon">Coming Soon</span>
+      </li>
+      <li>
+        <span class="ch-num">07</span>
+        <span class="ch-title greyed">What Does Understanding Even Mean</span>
+        <span class="ch-badge soon">Coming Soon</span>
+      </li>
+      <li>
+        <span class="ch-num">08</span>
+        <span class="ch-title greyed">The Bias Mirror</span>
+        <span class="ch-badge soon">Coming Soon</span>
+      </li>
+      <li>
+        <span class="ch-num">09</span>
+        <span class="ch-title greyed">The Examined Assumption</span>
+        <span class="ch-badge soon">Coming Soon</span>
+      </li>
+      <li>
+        <span class="ch-num">10</span>
+        <span class="ch-title greyed">The Social Animal and Its Machine</span>
+        <span class="ch-badge soon">Coming Soon</span>
+      </li>
+      <li>
+        <span class="ch-num">11</span>
+        <span class="ch-title greyed">The Art of Being Wrong Productively</span>
+        <span class="ch-badge soon">Coming Soon</span>
+      </li>
+      <li>
+        <span class="ch-num">12</span>
+        <span class="ch-title greyed">When Certainty Kills</span>
+        <span class="ch-badge soon">Coming Soon</span>
+      </li>
+      <li>
+        <span class="ch-num">13</span>
+        <span class="ch-title greyed">Steel-Manning the Machine</span>
+        <span class="ch-badge soon">Coming Soon</span>
+      </li>
+      <li>
+        <span class="ch-num">14</span>
+        <span class="ch-title greyed">Dialogue With a Mirror</span>
+        <span class="ch-badge soon">Coming Soon</span>
+      </li>
+      <li>
+        <span class="ch-num">15</span>
+        <span class="ch-title greyed">Now What</span>
+        <span class="ch-badge soon">Coming Soon</span>
+      </li>
+    </ul>
+  </section>
+  <footer>
+    <p>Science &bull; Cognition &bull; Critical Thinking</p>
+    <p style="margin-top:10px;">&copy; Sandy B. Patterson &mdash; <a href="https://sandybpatterson.github.io/">sandybpatterson.github.io</a></p>
+  </footer>
+</body>
+</html>
